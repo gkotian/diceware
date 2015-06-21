@@ -1,0 +1,3 @@
+[submodule "Catalan"]
+	path = Catalan
+	url = git@github.com:Jautenim/diceware-cat.git
