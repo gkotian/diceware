@@ -59,6 +59,8 @@ int main()
             int index_of_entry;
             int col;
 
+            bool done = false;
+
             for (col = 0; col < num_columns - 1; ++col)
             {
                 index_of_entry = (col * num_rows) + row;
@@ -68,6 +70,17 @@ int main()
                     leftJustify(page_contents[index_of_entry].word, word_width));
 
                 ++entries_shown;
+
+                if ( entries_shown == entries_in_cur_page )
+                {
+                    done = true;
+                    break;
+                }
+            }
+
+            if ( done )
+            {
+                break;
             }
 
             index_of_entry = (col * num_rows) + row;
