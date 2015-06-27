@@ -16,7 +16,8 @@ int main()
 
     auto entries_per_page = num_rows * num_columns;
 
-    File fd = File("English/wordlist.txt", "r");
+    File file_in = File("English/wordlist.txt", "r");
+    File file_out = File("English/wordlist_reformatted.txt", "w");
 
     struct Pair
     {
@@ -30,13 +31,13 @@ int main()
 
     int page_num = 0;
 
-    while (!fd.eof())
+    while (!file_in.eof())
     {
         int i;
 
-        for (i = 0; (i < entries_per_page) && !fd.eof(); ++i)
+        for (i = 0; (i < entries_per_page) && !file_in.eof(); ++i)
         {
-            string line = strip(squeeze(detab(chomp(fd.readln()), 1), " "));
+            string line = strip(squeeze(detab(chomp(file_in.readln()), 1), " "));
 
             if ( line.length == 0 )
             {
@@ -65,7 +66,7 @@ int main()
             {
                 index_of_entry = (col * num_rows) + row;
 
-                writef("%s%s",
+                file_out.writef("%s%s",
                     leftJustify(page_contents[index_of_entry].number, number_width),
                     leftJustify(page_contents[index_of_entry].word, word_width));
 
@@ -85,7 +86,7 @@ int main()
 
             index_of_entry = (col * num_rows) + row;
 
-            writef("%s%s\n",
+            file_out.writef("%s%s\n",
                 leftJustify(page_contents[index_of_entry].number, number_width),
                 page_contents[index_of_entry].word);
 
@@ -97,10 +98,11 @@ int main()
             }
         }
 
-        writeln();
+        file_out.writeln();
     }
 
-    fd.close();
+    file_in.close();
+    file_out.close();
 
     return 0;
 }
