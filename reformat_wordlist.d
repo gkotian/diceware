@@ -51,7 +51,7 @@ int main()
 
         // writefln("i = %d, Page %d : '%s' to '%s'", i, page_num++,
         //     page_contents[0], page_contents[i-1]);
-        auto entries_in_cur_page = i - 1;
+        auto entries_in_cur_page = i;
 
         int entries_shown = 0;
 
